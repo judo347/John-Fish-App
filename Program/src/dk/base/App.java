@@ -19,9 +19,10 @@ public class App extends Application {
         DayDisplay today = new DayDisplay("Today");
         DayDisplay tomorrow = new DayDisplay("Tomorrow");
         DayDisplay theDayAfter = new DayDisplay("The Day After");
+        DayDisplay thoughts = new DayDisplay("Thoughts"); //TODO Might just get reworked to a textfield? Or something else?
 
         //Add the HBox' to the root
-        root.getChildren().addAll(old, today, tomorrow, theDayAfter);
+        root.getChildren().addAll(old, today, tomorrow, theDayAfter, thoughts);
 
         //Set the stage
         Scene scene = new Scene(root, 1280, 620);
