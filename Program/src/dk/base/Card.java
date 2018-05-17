@@ -1,18 +1,20 @@
 package dk.base;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.CheckBox;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseDragEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class Card extends HBox {
 
-    public Card(String inputString) {
+    private App masterParent;
+    private DayDisplay displayParent;
+    private boolean isDragging = false;
+
+    public Card(String inputString, App masterParent, DayDisplay displayParent) {
         super();
+
+        this.masterParent = masterParent;
+        this.displayParent = displayParent;
 
         setMouseActions();
 
@@ -32,18 +34,22 @@ public class Card extends HBox {
 
     private void setMouseActions(){
 
-        this.setOnDragDetected(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Card.this.setStyleFaded(); //TODO TAKE NOTE OF THIS AKA REMEMBER!
-                System.out.println("Detected");
-            }
+        this.setOnDragDetected(event -> {
+            Card.this.isDragging = true;
+            Card.this.setStyleFaded(); //TODO TAKE NOTE OF THIS AKA REMEMBER!
+            Card.this.displayParent.cardIsBeingDragged(Card.this); //Send the card being dragged to DayDisplay parent.
+            System.out.println("Detected");
         });
 
-        this.setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("Released Mouse");
+        this.setOnMouseReleased(event -> {
+            if(Card.this.isDragging){
+                System.out.println("Drag released");
+                Card.this.isDragging = false;
+                Card.this.setStyleNormal();
+                Card.this.displayParent.cardHasBeenReleased(); //Send to the DayDisplay parrent, that the card is no longer being dragged.
+
+                //TODO Check and remove card
+
             }
         });
     }

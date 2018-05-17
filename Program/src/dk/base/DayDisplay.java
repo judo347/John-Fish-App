@@ -12,11 +12,27 @@ public class DayDisplay extends VBox {
     private HBox header;
     private String displayName;
     private ArrayList<Card> cardsList;
+    private App masterParent;
 
-    public DayDisplay(String displayName) {
+    private Card draggedCard;
+    private boolean gotCardBeingDragged;
+
+    private boolean isMouseOver;
+
+    public DayDisplay(String displayName, App masterParent) {
         super();
+        this.masterParent = masterParent;
         this.displayName = displayName;
+        this.gotCardBeingDragged = false;
+        this.draggedCard = null;
+        this.isMouseOver = false;
+
         this.cardsList = new ArrayList<>();
+
+        this.setMouseActions();
+
+        //this.testAddCards(); //TODO TEST REMOVE
+
         this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
                         "-fx-border-style: solid inside;" +
                         "-fx-border-width: 3;" +
@@ -32,14 +48,13 @@ public class DayDisplay extends VBox {
         header.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
                 BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE,
                 CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
-        header.getChildren().add(title);
+        //header.getChildren().add(title);
 
         updateDisplay();
     }
 
+    //TODO Update method has to be changed.. maybe not remove all and then all.. maybe something else?
     public void updateDisplay(){
-
-        this.testAddCards(); //TODO TEST REMOVE
 
         //Remove all content
         this.getChildren().removeAll();
@@ -51,8 +66,50 @@ public class DayDisplay extends VBox {
 
     private void testAddCards(){
 
-        this.cardsList.add(new Card("This is a test."));
-        this.cardsList.add(new Card("Number this needs to be done!"));
-        this.cardsList.add(new Card("3??"));
+        this.cardsList.add(new Card("This is a test.", masterParent, this));
+        this.cardsList.add(new Card("Number this needs to be done!", masterParent, this));
+        this.cardsList.add(new Card("3??", masterParent, this));
+    }
+
+    protected void cardIsBeingDragged(Card card){
+        this.draggedCard = card;
+        this.gotCardBeingDragged = true;
+    }
+
+    protected void cardHasBeenReleased(){
+
+        //TODO Call parent with card for check for other
+        this.masterParent.cardDragged(this.draggedCard, this); //Pass card to master
+
+        this.draggedCard = null;
+        this.gotCardBeingDragged = false;
+    }
+
+    private void setMouseActions(){
+
+        this.setOnMouseEntered(event -> {
+            DayDisplay.this.isMouseOver = true;
+            System.out.println("Mouse enter: " + DayDisplay.this.displayName);
+            DayDisplay.this.masterParent.moveCardToDest(DayDisplay.this);
+        });
+
+        this.setOnMouseExited(event -> {
+            DayDisplay.this.isMouseOver = false;
+            System.out.println("Mouse exit: " + DayDisplay.this.displayName);
+        });
+    }
+
+    public boolean isMouseOver() {
+        return isMouseOver;
+    }
+
+    public void addCard(Card card){
+        this.cardsList.add(card);
+        this.updateDisplay();
+    }
+
+    public void removeCard(Card card){
+        this.cardsList.remove(card);
+        this.updateDisplay();
     }
 }
