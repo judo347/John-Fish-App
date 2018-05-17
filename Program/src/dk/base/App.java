@@ -50,10 +50,10 @@ public class App extends Application {
     }
 
     private void addTestCards(){
-        this.old.addCard(new Card("Sometihng 1", this, old));
-        this.today.addCard(new Card("Sometihng 2", this, today));
-        this.tomorrow.addCard(new Card("Sometihng 3", this, tomorrow));
-        this.theDayAfter.addCard(new Card("Sometihng 4", this, theDayAfter));
+        this.old.addCard(new Card("Sometihng 1", old));
+        this.today.addCard(new Card("Sometihng 2", today));
+        this.tomorrow.addCard(new Card("Sometihng 3", tomorrow));
+        this.theDayAfter.addCard(new Card("Sometihng 4", theDayAfter));
     }
 
     protected void cardDragged(Card card, DayDisplay sourceDayDisplay){

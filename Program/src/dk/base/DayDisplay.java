@@ -41,6 +41,13 @@ public class DayDisplay extends VBox {
                         "-fx-border-color: black;");
         this.setMinSize(240, 240);
 
+
+
+
+        updateDisplay();
+    }
+
+    private void createHeader(){
         Text title = new Text(displayName);
         header = new HBox();
         //header.setPadding(new Insets(2));
@@ -48,9 +55,7 @@ public class DayDisplay extends VBox {
         header.setBorder(new Border(new BorderStroke(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK,
                 BorderStrokeStyle.NONE, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE,
                 CornerRadii.EMPTY, new BorderWidths(2), Insets.EMPTY)));
-        //header.getChildren().add(title);
-
-        updateDisplay();
+        header.getChildren().add(title);
     }
 
     //TODO Update method has to be changed.. maybe not remove all and then all.. maybe something else?
@@ -60,15 +65,16 @@ public class DayDisplay extends VBox {
         this.getChildren().removeAll();
 
         //Add header and cards
+        this.createHeader();
         this.getChildren().add(header);
         this.getChildren().addAll(cardsList);
     }
 
     private void testAddCards(){
 
-        this.cardsList.add(new Card("This is a test.", masterParent, this));
-        this.cardsList.add(new Card("Number this needs to be done!", masterParent, this));
-        this.cardsList.add(new Card("3??", masterParent, this));
+        this.cardsList.add(new Card("This is a test.", this));
+        this.cardsList.add(new Card("Number this needs to be done!", this));
+        this.cardsList.add(new Card("3??", this));
     }
 
     protected void cardIsBeingDragged(Card card){
@@ -90,7 +96,7 @@ public class DayDisplay extends VBox {
         this.setOnMouseEntered(event -> {
             DayDisplay.this.isMouseOver = true;
             System.out.println("Mouse enter: " + DayDisplay.this.displayName);
-            DayDisplay.this.masterParent.moveCardToDest(DayDisplay.this);
+            DayDisplay.this.masterParent.moveCardToDest(DayDisplay.this); //TODO IS THIS CORRECT?
         });
 
         this.setOnMouseExited(event -> {
@@ -104,7 +110,9 @@ public class DayDisplay extends VBox {
     }
 
     public void addCard(Card card){
+        card.setDisplayParent(this);
         this.cardsList.add(card);
+
         this.updateDisplay();
     }
 

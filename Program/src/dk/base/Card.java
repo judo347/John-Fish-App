@@ -6,14 +6,12 @@ import javafx.scene.text.Text;
 
 public class Card extends HBox {
 
-    private App masterParent;
     private DayDisplay displayParent;
     private boolean isDragging = false;
 
-    public Card(String inputString, App masterParent, DayDisplay displayParent) {
+    public Card(String inputString, DayDisplay displayParent) {
         super();
 
-        this.masterParent = masterParent;
         this.displayParent = displayParent;
 
         setMouseActions();
@@ -78,5 +76,9 @@ public class Card extends HBox {
                 "-fx-border-color: black;" +
                 "-fx-hgap: 50;" +
                 "-fx-vgap: 50;");
+    }
+
+    public void setDisplayParent(DayDisplay displayParent) {
+        this.displayParent = displayParent;
     }
 }
