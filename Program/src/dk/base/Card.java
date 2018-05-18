@@ -14,20 +14,23 @@ public class Card extends HBox {
 
         this.displayParent = displayParent;
 
-        setMouseActions();
-
         //this.setPadding(new Insets(10)); //TODO Should be done with css functions TODO does not give space between cards
         setStyleNormal(); //Set style of this class
+
+        //Create checkbox
         CheckBox checkbox = new CheckBox();
         HBox left = new HBox();
         left.getChildren().add(checkbox);
 
+        //Create string
         Text text = new Text(inputString);
         HBox right = new HBox();
         //right.setMaxWidth(0.1);
         right.getChildren().add(text);
 
         this.getChildren().addAll(left, right);
+
+        setMouseActions();
     }
 
     private void setMouseActions(){

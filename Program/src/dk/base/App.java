@@ -16,13 +16,13 @@ public class App extends Application {
 
     private boolean isWaitingForTransfer;
     private Card cardUnderTransfer;
-    private DayDisplay cardSource;
+    private DayDisplay cardSourceDayDisplay;
 
     @Override
     public void start(Stage stage) throws Exception {
 
         this.cardUnderTransfer = null;
-        this.cardSource = null;
+        this.cardSourceDayDisplay = null;
         this.isWaitingForTransfer = false;
 
         //Create root
@@ -59,17 +59,20 @@ public class App extends Application {
     protected void cardDragged(Card card, DayDisplay sourceDayDisplay){
 
         this.cardUnderTransfer = card;
-        this.cardSource = sourceDayDisplay;
+        this.cardSourceDayDisplay = sourceDayDisplay;
         this.isWaitingForTransfer = true;
     }
 
     protected void moveCardToDest(DayDisplay destDayDisplay) {
 
         if(this.isWaitingForTransfer){
+            this.isWaitingForTransfer = false;
+
+            cardSourceDayDisplay.removeCard(this.cardUnderTransfer);
             destDayDisplay.addCard(this.cardUnderTransfer);
 
+            this.cardSourceDayDisplay = null;
             this.cardUnderTransfer = null;
-            this.isWaitingForTransfer = false;
         }
     }
 }
