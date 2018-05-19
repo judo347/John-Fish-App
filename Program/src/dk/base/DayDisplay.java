@@ -67,10 +67,10 @@ public class DayDisplay extends VBox {
     public void updateDisplay(){
 
         //Remove all content
-        this.getChildren().removeAll();
+        this.getChildren().clear();
 
         //Add header and cards
-
+        this.getChildren().add(header);
         this.getChildren().addAll(cardsList);
     }
 
@@ -106,6 +106,12 @@ public class DayDisplay extends VBox {
         this.setOnMouseExited(event -> {
             DayDisplay.this.isMouseOver = false;
             System.out.println("Mouse exit: " + DayDisplay.this.displayName);
+        });
+
+        this.setOnMouseClicked(event -> { //TODO Rework to pop up a message for adding content
+            System.out.println("Mouse clicked!");
+            DayDisplay.this.cardsList.add(new Card("Hello", DayDisplay.this));
+            this.updateDisplay();
         });
     }
 
