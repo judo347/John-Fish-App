@@ -29,11 +29,11 @@ public class App extends Application {
         Pane root = new HBox();
 
         //Create days
-        this.old = new DayDisplay("Old", this);
-        this.today = new DayDisplay("Today", this);
-        this.tomorrow = new DayDisplay("Tomorrow", this);
-        this.theDayAfter = new DayDisplay("The Day After", this);
-        this.thoughts = new DayDisplay("Thoughts", this); //TODO Might just get reworked to a textfield? Or something else?
+        this.old = new DayDisplay("Old", this, stage);
+        this.today = new DayDisplay("Today", this, stage);
+        this.tomorrow = new DayDisplay("Tomorrow", this, stage);
+        this.theDayAfter = new DayDisplay("The Day After", this, stage);
+        this.thoughts = new DayDisplay("Thoughts", this, stage); //TODO Might just get reworked to a textfield? Or something else?
 
 
 

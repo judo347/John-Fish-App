@@ -1,10 +1,14 @@
 package dk.base;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class DayDisplay extends VBox {
@@ -13,14 +17,16 @@ public class DayDisplay extends VBox {
     private String displayName;
     private ArrayList<Card> cardsList;
     private App masterParent;
+    private Stage stage;
 
     private Card draggedCard;
     private boolean gotCardBeingDragged;
 
     private boolean isMouseOver;
 
-    public DayDisplay(String displayName, App masterParent) {
-        super();
+    public DayDisplay(String displayName, App masterParent, Stage stage) {
+        super(4);
+        this.stage = stage;
         this.masterParent = masterParent;
         this.displayName = displayName;
         this.header = createHeader(displayName);
@@ -110,7 +116,9 @@ public class DayDisplay extends VBox {
 
         this.setOnMouseClicked(event -> { //TODO Rework to pop up a message for adding content
             System.out.println("Mouse clicked!");
-            DayDisplay.this.cardsList.add(new Card("Hello", DayDisplay.this));
+            //DayDisplay.this.popupAddCard.show(DayDisplay.this.stage);
+            PopupAddCard.display(DayDisplay.this);
+            //DayDisplay.this.cardsList.add(new Card("Hello", DayDisplay.this));
             this.updateDisplay();
         });
     }
@@ -129,5 +137,9 @@ public class DayDisplay extends VBox {
     public void removeCard(Card card){
         this.cardsList.remove(card);
         this.updateDisplay();
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 }
