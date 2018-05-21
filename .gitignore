@@ -27,3 +27,7 @@ hs_err_pid*
 Program/Program.iml
 Program/.idea/modules.xml
 *.xml
+<<<<<<< HEAD
+Pastebin-Java-Api/README.md
+Pastebin-Java-Api/Pastebin-Java-Api.iml
+>>>>>>> master
