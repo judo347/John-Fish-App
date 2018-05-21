@@ -14,7 +14,6 @@ public class Card extends HBox {
 
         this.displayParent = displayParent;
 
-        //this.setPadding(new Insets(10)); //TODO Should be done with css functions TODO does not give space between cards
         setStyleNormal(); //Set style of this class
 
         //Create checkbox
@@ -57,15 +56,15 @@ public class Card extends HBox {
 
     private void setStyleNormal(){
 
-        this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
+        this.setStyle(  "-fx-padding: 4;" + //Inside: space between border and content
                 "-fx-background-color: grey;" +
                 "-fx-border-style: solid inside;" +
                 "-fx-border-width: 3;" +
-                "-fx-border-insets: 9;" + //Outside: space to other elements
-                "-fx-border-radius: 5;" + //Side of rounding in border
+                "-fx-border-insets: 1;" + //Outside: space to other elements
+                "-fx-border-radius: 4;" + //Side of rounding in border
                 "-fx-border-color: black;" +
-                "-fx-hgap: 50;" +
-                "-fx-vgap: 50;");
+                "-fx-hgap: 50;" + //TODO Does this really do anything?
+                "-fx-vgap: 50;"); //TODO Does this really do anything?
     }
 
     private void setStyleFaded(){ //TODO Change to something that looks faded
