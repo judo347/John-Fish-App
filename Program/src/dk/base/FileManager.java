@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /** TODO WHEN WE LOAD FROM PASTEBIN, TAKE THE MOST RECENT ONE. */
 
@@ -18,10 +19,11 @@ public class FileManager {
 
     private static final String DEV_KEY = "5d9b27419e24a576ff014e8c1c49738b";
     private static final String USER_NAME = "mkTodoApp";
-    private static final String USER_PASSWORD = "mkTodoApp";
+    private static final String USER_PASSWORD = "je7Zk8BK";
     private static final String PASTE_URL = "https://pastebin.com/KZXSGkp4";
     private static final String PASTE_URL_POSTFIX = "KZXSGkp4";
     private static final String PASTE_NAME = "mikkelkuntz";
+    private static final String USER_KEY = "4a591c3189c450be28f80fecb36fe09c";
 
 
 
@@ -121,5 +123,37 @@ public class FileManager {
         }
 
         return cardStrings;
+    }
+
+
+    /** TODO Should return an HBox*/
+    public static void loadFromPasteBin(){
+
+        PastebinFactory factory = new PastebinFactory();
+        Pastebin pastebin = factory.createPastebin(DEV_KEY);
+
+        final Response<String> userLoginKeyResponse = pastebin.login(USER_NAME, USER_PASSWORD);
+
+        if (userLoginKeyResponse.hasError()) {
+            System.out.println("Could not login " + userLoginKeyResponse.getError());
+            return;
+        }
+
+        final String userKey = userLoginKeyResponse.get();
+
+        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5);
+        //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(USER_KEY, 5);
+
+        if (pastesResponse.hasError()) {
+            System.out.println("Could not read pasts! " + pastesResponse.getError());
+            return;
+        }
+
+        final List<Paste> pastes = pastesResponse.get();
+
+        for (final Paste paste : pastes) {
+            System.out.println(paste.getTitle());
+            System.out.println("---");
+        }
     }
 }
