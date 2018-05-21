@@ -1,14 +1,19 @@
 package dk.base;
 
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.event.KeyEvent;
 
 public class PopupAddCard {
 
@@ -21,8 +26,6 @@ public class PopupAddCard {
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle("Add card to " + dayDisplay.getDisplayName());
 
-
-        //Label label1= new Label("Pop up window now displayed");
         TextField textField = new TextField("Enter your todo.");
         Button button1= new Button("Add card");
 
@@ -31,8 +34,26 @@ public class PopupAddCard {
             popupWindow.close();
         });
 
-        VBox layout = new VBox(3);
 
+
+        //popupWindow.addEventHandler(new EventHandler<KeyEvent>());
+
+
+        /*
+        final EventHandler<KeyEvent> keyEventHandler =
+        new EventHandler<KeyEvent>() {
+            public void handle(final KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    setPressed(keyEvent.getEventType()
+                        == KeyEvent.KEY_PRESSED);
+
+                    keyEvent.consume();
+                }
+            }
+        };
+         */
+
+        VBox layout = new VBox(3);
 
         layout.getChildren().addAll(textField, button1);
         layout.setAlignment(Pos.CENTER);
@@ -44,7 +65,6 @@ public class PopupAddCard {
     }
 
     private static Card createCard(String todoText, DayDisplay dayDisplay){
-
         return new Card(todoText, dayDisplay);
     }
 }

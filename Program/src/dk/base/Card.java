@@ -8,10 +8,12 @@ public class Card extends HBox {
 
     private DayDisplay displayParent;
     private boolean isDragging = false;
+    private String text;
 
     public Card(String inputString, DayDisplay displayParent) {
         super();
 
+        this.text = inputString;
         this.displayParent = displayParent;
 
         //this.setPadding(new Insets(10)); //TODO Should be done with css functions TODO does not give space between cards
@@ -48,9 +50,6 @@ public class Card extends HBox {
                 Card.this.isDragging = false;
                 Card.this.setStyleNormal();
                 Card.this.displayParent.cardHasBeenReleased(); //Send to the DayDisplay parrent, that the card is no longer being dragged.
-
-                //TODO Check and remove card
-
             }
         });
     }
@@ -83,5 +82,9 @@ public class Card extends HBox {
 
     public void setDisplayParent(DayDisplay displayParent) {
         this.displayParent = displayParent;
+    }
+
+    public String getText() {
+        return text;
     }
 }

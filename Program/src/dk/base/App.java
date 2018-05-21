@@ -19,7 +19,7 @@ public class App extends Application {
     private DayDisplay cardSourceDayDisplay;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         this.cardUnderTransfer = null;
         this.cardSourceDayDisplay = null;
