@@ -9,6 +9,7 @@ public class Card extends HBox {
     private DayDisplay displayParent;
     private boolean isDragging = false;
     private String text;
+    private CheckBox checkBox;
 
     public Card(String inputString, DayDisplay displayParent) {
         super();
@@ -19,9 +20,9 @@ public class Card extends HBox {
         setStyleNormal(); //Set style of this class
 
         //Create checkbox
-        CheckBox checkbox = new CheckBox();
+        this.checkBox = new CheckBox();
         HBox left = new HBox();
-        left.getChildren().add(checkbox);
+        left.getChildren().add(checkBox);
 
         //Create string
         Text text = new Text(inputString);
@@ -85,5 +86,10 @@ public class Card extends HBox {
 
     public String getText() {
         return text;
+    }
+
+
+    public boolean getCheckedStatus(){
+        return this.checkBox.isSelected(); //TODO is this the correct way to get it?
     }
 }

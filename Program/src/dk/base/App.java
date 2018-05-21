@@ -26,7 +26,7 @@ public class App extends Application {
         this.isWaitingForTransfer = false;
 
         //Create root
-        Pane root = new HBox();
+        HBox root = new HBox();
 
         //Create days
         this.old = new DayDisplay("Old", this, stage);
@@ -47,6 +47,8 @@ public class App extends Application {
         stage.show();
 
         addTestCards(); //TODO REMOVE TEMP
+
+        FileManager.saveToFile(root);
     }
 
     private void addTestCards(){
