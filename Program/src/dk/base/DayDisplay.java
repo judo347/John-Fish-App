@@ -41,13 +41,8 @@ public class DayDisplay extends VBox {
 
     /** Sets the style of the display. */
     private void setStyle(){
-        this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 3;" +
-                "-fx-border-insets: 2;" + //Outside: space to other elements
-                "-fx-border-radius: 5;" + //Side of rounding in border
-                "-fx-border-color: black;");
-        this.setMinSize(240, 240);
+        this.getStyleClass().add("DayDisplay");
+        this.setMinSize(200, 620);
     }
 
     /** Creates and returns the header for the display.

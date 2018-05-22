@@ -1,0 +1,32 @@
+.DayDisplay{
+    -fx-padding: 3; /* Inside: space between border and content */
+    -fx-border-style: solid inside;
+    -fx-border-width: 3;
+    -fx-border-insets: 2; /* Outside: space to other elements */
+    -fx-border-radius: 5; /* Side of rounding in border */
+    -fx-border-color: black;
+}
+
+.CardNormal{
+    -fx-padding: 4; /* Inside: space between border and content */
+    -fx-background-color: grey;
+    -fx-border-style: solid inside;
+    -fx-border-width: 3;
+    -fx-border-insets: 1; /* Outside: space to other elements */
+    -fx-border-radius: 4; /* Side of rounding in border */
+    -fx-border-color: black;
+    -fx-hgap: 50; /*TODO Does this really do anything?*/
+    -fx-vgap: 50; /*TODO Does this really do anything?*/
+}
+
+.CardFaded{ /* TODO CHANGE TO SOMETHING THAT LOOKS FADED*/
+    -fx-padding: 4; /* Inside: space between border and content */
+    -fx-background-color: red;
+    -fx-border-style: solid inside;
+    -fx-border-width: 3;
+    -fx-border-insets: 1; /* Outside: space to other elements */
+    -fx-border-radius: 4; /* Side of rounding in border */
+    -fx-border-color: black;
+    -fx-hgap: 50; /*TODO Does this really do anything?*/
+    -fx-vgap: 50; /*TODO Does this really do anything?*/
+}

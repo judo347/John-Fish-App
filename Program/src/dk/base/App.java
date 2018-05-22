@@ -11,8 +11,8 @@ import java.util.HashMap;
 public class App extends Application {
 
     private enum DisplayNames{
-        WEEKGOALS("Weekgoals"),
         EXTRA("Extra"),
+        WEEKGOALS("Weekgoals"),
         MONDAY("Monday"),
         TUESDAY("Tuesday"),
         WEDNESDAY("Wednesday"),
@@ -52,7 +52,8 @@ public class App extends Application {
             root.getChildren().add(dayDisplays.get(displayNames));
 
         //Set the stage
-        Scene scene = new Scene(root, 1280, 620);
+        Scene scene = new Scene(root, 1800, 620);
+        scene.getStylesheets().add("dk/base/styles.css");
         stage.setScene(scene);
         stage.setTitle("John Fish App.");
         stage.show();

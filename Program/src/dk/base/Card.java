@@ -12,11 +12,15 @@ public class Card extends HBox {
     private CheckBox checkBox;
     private Text text;
 
+    private final String cssNormal = "CardNormal";
+    private final String cssFaded = "CardFaded";
+
     public Card(String inputString, DayDisplay displayParent) {
         super();
 
         this.displayParent = displayParent;
 
+        addStyles();
         setStyleNormal(); //Set style of this class
 
         //Create checkbox
@@ -56,33 +60,33 @@ public class Card extends HBox {
         });
     }
 
+    /** Adds the styles to the card. */
+    private void addStyles(){
+        //this.getStyleClass().add(cssNormal);
+        //this.getStyleClass().add(cssFaded);
+    }
+
     /** Set the style of the card to the normal one. */
     private void setStyleNormal(){
+        if(this.getStyleClass().size() != 0)
+            this.getStyleClass().remove(cssFaded);
+        else
+            this.getStyleClass().add(cssNormal);
 
-        this.setStyle(  "-fx-padding: 4;" + //Inside: space between border and content
-                "-fx-background-color: grey;" +
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 3;" +
-                "-fx-border-insets: 1;" + //Outside: space to other elements
-                "-fx-border-radius: 4;" + //Side of rounding in border
-                "-fx-border-color: black;" +
-                "-fx-hgap: 50;" + //TODO Does this really do anything?
-                "-fx-vgap: 50;"); //TODO Does this really do anything?
+        this.setStyle(cssNormal);
     }
 
     /** Set the style of the card to the faded one. */
-    //TODO Change to something that looks faded
     private void setStyleFaded(){
+        //this.getStyleClass().add(cssFaded);
+        //this.setStyle(cssFaded);
 
-        this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
-                "-fx-background-color: red;" +
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 3;" +
-                "-fx-border-insets: 9;" + //Outside: space to other elements
-                "-fx-border-radius: 5;" + //Side of rounding in border
-                "-fx-border-color: black;" +
-                "-fx-hgap: 50;" +
-                "-fx-vgap: 50;");
+        if(this.getStyleClass().size() != 0)
+            this.getStyleClass().remove(cssNormal);
+        else
+            this.getStyleClass().add(cssFaded);
+
+        this.setStyle(cssFaded);
     }
 
     public void setDisplayParent(DayDisplay displayParent) {
