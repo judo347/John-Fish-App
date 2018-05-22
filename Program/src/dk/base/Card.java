@@ -4,17 +4,17 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
+/** The card is the one displaying a checkbox and a text. */
 public class Card extends HBox {
 
     private DayDisplay displayParent;
     private boolean isDragging = false;
-    private String text;
     private CheckBox checkBox;
+    private Text text;
 
     public Card(String inputString, DayDisplay displayParent) {
         super();
 
-        this.text = inputString;
         this.displayParent = displayParent;
 
         setStyleNormal(); //Set style of this class
@@ -24,10 +24,9 @@ public class Card extends HBox {
         HBox left = new HBox();
         left.getChildren().add(checkBox);
 
-        //Create string
-        Text text = new Text(inputString);
+        //Create text
+        this.text = new Text(inputString);
         HBox right = new HBox();
-        //right.setMaxWidth(0.1);
         right.getChildren().add(text);
 
         this.getChildren().addAll(left, right);
@@ -35,18 +34,21 @@ public class Card extends HBox {
         setMouseActions();
     }
 
+    /** Sets mouse actions for the card. */
     private void setMouseActions(){
 
+        // The action that happens when the card is dragged.
+        // Change style and tell parent that this is being dragged.
         this.setOnDragDetected(event -> {
             Card.this.isDragging = true;
-            Card.this.setStyleFaded(); //TODO TAKE NOTE OF THIS AKA REMEMBER!
+            Card.this.setStyleFaded();
             Card.this.displayParent.cardIsBeingDragged(Card.this); //Send the card being dragged to DayDisplay parent.
-            System.out.println("Detected");
         });
 
+        // The action that happens when the card is released from a drag.
+        // Change style to normal and tell parent it has been released.
         this.setOnMouseReleased(event -> {
-            if(Card.this.isDragging){
-                System.out.println("Drag released");
+            if(Card.this.isDragging){ //Is the card getting released from a drag?
                 Card.this.isDragging = false;
                 Card.this.setStyleNormal();
                 Card.this.displayParent.cardHasBeenReleased(); //Send to the DayDisplay parrent, that the card is no longer being dragged.
@@ -85,9 +87,8 @@ public class Card extends HBox {
     }
 
     public String getText() {
-        return text;
+        return text.getText();
     }
-
 
     public boolean getCheckedStatus(){
         return this.checkBox.isSelected(); //TODO is this the correct way to get it?

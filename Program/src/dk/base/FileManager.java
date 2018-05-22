@@ -125,7 +125,6 @@ public class FileManager {
         return cardStrings;
     }
 
-
     /** TODO Should return an HBox*/
     public static void loadFromPasteBin(){
 
