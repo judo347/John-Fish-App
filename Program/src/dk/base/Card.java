@@ -7,6 +7,8 @@ import javafx.scene.text.Text;
 /** The card is the one displaying a checkbox and a text. */
 public class Card extends HBox {
 
+    private boolean isMouseOver;
+
     private DayDisplay displayParent;
     private boolean isDragging = false;
     private CheckBox checkBox;
@@ -17,6 +19,7 @@ public class Card extends HBox {
 
     public Card(String inputString, DayDisplay displayParent) {
         super();
+        this.isMouseOver = false;
 
         this.displayParent = displayParent;
 
@@ -58,6 +61,15 @@ public class Card extends HBox {
                 Card.this.displayParent.cardHasBeenReleased(); //Send to the DayDisplay parrent, that the card is no longer being dragged.
             }
         });
+
+        // Triggers if card is clicked. Use to edit or delete
+        this.setOnMouseClicked(event -> PopupEditCard.display(Card.this.displayParent, Card.this));
+
+        // Triggers if the mouse has entered this card.
+        this.setOnMouseEntered(event -> Card.this.isMouseOver = true);
+
+        // Triggers if the mouse has exited this card.
+        this.setOnMouseExited(event -> Card.this.isMouseOver = false);
     }
 
     /** Adds the styles to the card. */
@@ -68,24 +80,15 @@ public class Card extends HBox {
 
     /** Set the style of the card to the normal one. */
     private void setStyleNormal(){
-        if(this.getStyleClass().size() != 0)
-            this.getStyleClass().remove(cssFaded);
-        else
-            this.getStyleClass().add(cssNormal);
-
+        this.getStyleClass().clear();
+        this.getStyleClass().add(cssNormal);
         this.setStyle(cssNormal);
     }
 
     /** Set the style of the card to the faded one. */
     private void setStyleFaded(){
-        //this.getStyleClass().add(cssFaded);
-        //this.setStyle(cssFaded);
-
-        if(this.getStyleClass().size() != 0)
-            this.getStyleClass().remove(cssNormal);
-        else
-            this.getStyleClass().add(cssFaded);
-
+        this.getStyleClass().clear();
+        this.getStyleClass().add(cssFaded);
         this.setStyle(cssFaded);
     }
 
@@ -98,8 +101,19 @@ public class Card extends HBox {
         return text.getText();
     }
 
+    /** Sets the text of the card. */
+    public void setText(String string){
+        this.text.setText(string);
+    }
+
     /** Gets the status of the checkbox. */
     public boolean getCheckedStatus(){
         return this.checkBox.isSelected(); //TODO is this the correct way to get it?
     }
+
+    public boolean isMouseOver() {
+        return isMouseOver;
+    }
+
+
 }

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class PopupAddCard {
 
-    /** The popup displayed when a new card is to be added.
+    /** The popup is displayed when a new card is to be added.
      *  @param dayDisplay the display to receive the created card. */
     public static void display(DayDisplay dayDisplay){
 
@@ -21,7 +21,7 @@ public class PopupAddCard {
 
         // Create elements of popup window
         TextField textField = new TextField("Enter your todo.");
-        Button button1= new Button("Add card");
+        Button button1 = new Button("Add card");
 
         // Button action: create the card and add it to the display
         button1.setOnAction(e -> {

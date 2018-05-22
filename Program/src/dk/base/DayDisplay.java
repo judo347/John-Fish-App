@@ -42,6 +42,7 @@ public class DayDisplay extends VBox {
     /** Sets the style of the display. */
     private void setStyle(){
         this.getStyleClass().add("DayDisplay");
+        //this.setStyle("DayDisplay");
         this.setMinSize(200, 620);
     }
 
@@ -99,7 +100,11 @@ public class DayDisplay extends VBox {
         this.setOnMouseExited(event -> DayDisplay.this.isMouseOver = false);
 
         // Trippers when display is clicked: popup with create a new card.
-        this.setOnMouseClicked(event -> PopupAddCard.display(DayDisplay.this));
+        // Also checks if the click happened on a card or this display.
+        this.setOnMouseClicked(event -> {
+            if(!DayDisplay.this.isMouseOverCard())
+                PopupAddCard.display(DayDisplay.this);
+        });
     }
 
     /** Added a card to this display. */
@@ -121,5 +126,18 @@ public class DayDisplay extends VBox {
 
     public String getDisplayName() {
         return displayName;
+    }
+
+    /** Checks if the mouse is over one of the cards in this display. */
+    public boolean isMouseOverCard(){
+
+        boolean isMouseOverACard = false;
+
+        for(Card card : cardsList){
+            if(card.isMouseOver())
+                isMouseOverACard = true;
+        }
+
+        return isMouseOverACard;
     }
 }

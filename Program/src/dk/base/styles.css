@@ -1,4 +1,5 @@
 .DayDisplay{
+    -fx-background-color: #ffffff;
     -fx-padding: 3; /* Inside: space between border and content */
     -fx-border-style: solid inside;
     -fx-border-width: 3;
@@ -19,7 +20,7 @@
     -fx-vgap: 50; /*TODO Does this really do anything?*/
 }
 
-.CardFaded{ /* TODO CHANGE TO SOMETHING THAT LOOKS FADED*/
+.CardFaded{
     -fx-padding: 4; /* Inside: space between border and content */
     -fx-background-color: red;
     -fx-border-style: solid inside;
