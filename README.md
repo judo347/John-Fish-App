@@ -1,3 +1,15 @@
+##TODO
+ - Pivot and make the app weekly, with goals for each day and a column for week goals.
+
+### Cleanup done for the following classes:
+- Card
+- PopupAddCard
+- DayDisplay
+- App
+
+#### left to clean up:
+- FileManager (Maybe not just yet)
+
 # John Fish App
 
 The app will be based on John Fish' idea about a Growth book. 

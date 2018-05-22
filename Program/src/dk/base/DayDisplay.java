@@ -1,52 +1,45 @@
 package dk.base;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
 
-import java.awt.*;
 import java.util.ArrayList;
 
+/** This is the columns displayed in the app. */
 public class DayDisplay extends VBox {
 
     private HBox header;
     private String displayName;
     private ArrayList<Card> cardsList;
     private App masterParent;
-    private Stage stage;
 
     private Card draggedCard;
-    private boolean gotCardBeingDragged;
 
     private boolean isMouseOver;
 
-    public DayDisplay(String displayName, App masterParent, Stage stage) {
+    /** The constructor for the display.
+     *  @param displayName the name of the display.
+     *  @param masterParent the parent of the display. */
+    public DayDisplay(String displayName, App masterParent) {
         super(4);
-        this.stage = stage;
         this.masterParent = masterParent;
         this.displayName = displayName;
         this.header = createHeader(displayName);
-        this.gotCardBeingDragged = false;
         this.draggedCard = null;
         this.isMouseOver = false;
-
         this.cardsList = new ArrayList<>();
 
-        this.getChildren().add(header);
+        this.getChildren().add(header); // Add content
 
         this.setMouseActions();
         this.setStyle();
 
-        //this.testAddCards(); //TODO TEST REMOVE
-
         updateDisplay();
-
     }
 
+    /** Sets the style of the display. */
     private void setStyle(){
         this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
                 "-fx-border-style: solid inside;" +
@@ -57,6 +50,8 @@ public class DayDisplay extends VBox {
         this.setMinSize(240, 240);
     }
 
+    /** Creates and returns the header for the display.
+     *  @param displayName the name to be displayed in the header. */
     private HBox createHeader(String displayName){
         Text title = new Text(displayName);
         HBox header = new HBox();
@@ -69,8 +64,8 @@ public class DayDisplay extends VBox {
         return header;
     }
 
-    //TODO Update method has to be changed.. maybe not remove all and then all.. maybe something else?
-    public void updateDisplay(){
+    /** Updates the content of the display column. */
+    private void updateDisplay(){
 
         //Remove all content
         this.getChildren().clear();
@@ -80,60 +75,50 @@ public class DayDisplay extends VBox {
         this.getChildren().addAll(cardsList);
     }
 
-    private void testAddCards(){
-
-        this.cardsList.add(new Card("This is a test.", this));
-        this.cardsList.add(new Card("Number this needs to be done!", this));
-        this.cardsList.add(new Card("3??", this));
-    }
-
+    /** This is called when a card is dragged.
+     *  Sets the display variable to that card. */
     protected void cardIsBeingDragged(Card card){
         this.draggedCard = card;
-        this.gotCardBeingDragged = true;
     }
 
+    /** This is called when a card is released.
+     *  Places the card into the correct display. */
     protected void cardHasBeenReleased(){
 
-        //TODO Call parent with card for check for other
         this.masterParent.cardDragged(this.draggedCard, this); //Pass card to master
-
         this.draggedCard = null;
-        this.gotCardBeingDragged = false;
     }
 
-    private void setMouseActions(){
 
+    /** Sets mouse actions for the display. */
+    private void setMouseActions() {
+
+        // Triggers if the mouse has entered this display.
+        // Sets the move card dest to this.
         this.setOnMouseEntered(event -> {
             DayDisplay.this.isMouseOver = true;
-            System.out.println("Mouse enter: " + DayDisplay.this.displayName);
-            DayDisplay.this.masterParent.moveCardToDest(DayDisplay.this); //TODO IS THIS CORRECT?
+            DayDisplay.this.masterParent.moveCardToDest(DayDisplay.this);
         });
 
-        this.setOnMouseExited(event -> {
-            DayDisplay.this.isMouseOver = false;
-            System.out.println("Mouse exit: " + DayDisplay.this.displayName);
-        });
+        // Triggers if the mouse has exited this display.
+        this.setOnMouseExited(event -> DayDisplay.this.isMouseOver = false);
 
-        this.setOnMouseClicked(event -> { //TODO Rework to pop up a message for adding content
-            System.out.println("Mouse clicked!");
-            //DayDisplay.this.popupAddCard.show(DayDisplay.this.stage);
-            PopupAddCard.display(DayDisplay.this);
-            //DayDisplay.this.cardsList.add(new Card("Hello", DayDisplay.this));
-            this.updateDisplay();
-        });
+        // Trippers when display is clicked: popup with create a new card.
+        this.setOnMouseClicked(event -> PopupAddCard.display(DayDisplay.this));
     }
 
-    public boolean isMouseOver() {
-        return isMouseOver;
-    }
-
+    /** Added a card to this display. */
     public void addCard(Card card){
+
+        // Adds the card to this display
         card.setDisplayParent(this);
         this.cardsList.add(card);
 
+        // Update the display
         this.updateDisplay();
     }
 
+    /** Removes a card from this display. */
     public void removeCard(Card card){
         this.cardsList.remove(card);
         this.updateDisplay();

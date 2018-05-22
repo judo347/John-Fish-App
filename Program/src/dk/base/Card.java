@@ -56,6 +56,7 @@ public class Card extends HBox {
         });
     }
 
+    /** Set the style of the card to the normal one. */
     private void setStyleNormal(){
 
         this.setStyle(  "-fx-padding: 4;" + //Inside: space between border and content
@@ -69,7 +70,9 @@ public class Card extends HBox {
                 "-fx-vgap: 50;"); //TODO Does this really do anything?
     }
 
-    private void setStyleFaded(){ //TODO Change to something that looks faded
+    /** Set the style of the card to the faded one. */
+    //TODO Change to something that looks faded
+    private void setStyleFaded(){
 
         this.setStyle(  "-fx-padding: 3;" + //Inside: space between border and content
                 "-fx-background-color: red;" +
@@ -86,10 +89,12 @@ public class Card extends HBox {
         this.displayParent = displayParent;
     }
 
+    /** Gets the text of the card. */
     public String getText() {
         return text.getText();
     }
 
+    /** Gets the status of the checkbox. */
     public boolean getCheckedStatus(){
         return this.checkBox.isSelected(); //TODO is this the correct way to get it?
     }
