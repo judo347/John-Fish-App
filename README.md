@@ -1,16 +1,6 @@
 ##TODO
- - Pivot and make the app weekly, with goals for each day and a column for week goals.
- - Remove card
- - Edit card
-
-### Cleanup done for the following classes:
-- Card
-- PopupAddCard
-- DayDisplay
-- App
-
-#### left to clean up:
-- FileManager (Maybe not just yet)
+ - FileManager (Rework to use JSON)
+ - Bug: clicking card triggers both popups
 
 # John Fish App
 
