@@ -1,5 +1,7 @@
 ##TODO
  - Pivot and make the app weekly, with goals for each day and a column for week goals.
+ - Remove card
+ - Edit card
 
 ### Cleanup done for the following classes:
 - Card

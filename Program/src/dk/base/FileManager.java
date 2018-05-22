@@ -25,8 +25,6 @@ public class FileManager {
     private static final String PASTE_NAME = "mikkelkuntz";
     private static final String USER_KEY = "4a591c3189c450be28f80fecb36fe09c";
 
-
-
     public static void saveToFile(HBox root){
 
         if(root.getChildren().size() != 5) //Check for correct number of elements
@@ -91,7 +89,7 @@ public class FileManager {
         pasteBuilder.setTitle(PASTE_NAME);
         pasteBuilder.setRaw(pasteString); //TODO This will be where my paste is going
         pasteBuilder.setMachineFriendlyLanguage("text");
-        pasteBuilder.setVisiblity(PasteVisiblity.Unlisted);
+        pasteBuilder.setVisiblity(PasteVisiblity.Public); //TODO Paste are not currently public?
         pasteBuilder.setExpire(PasteExpire.Never);
 
         // Create paste object
