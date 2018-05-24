@@ -58,6 +58,9 @@ public class App extends Application {
         stage.setTitle("John Fish App.");
         stage.show();
 
+
+
+
         addTestCards(); //TODO REMOVE TEMP
 
         //FileManager.saveToFile(root);
