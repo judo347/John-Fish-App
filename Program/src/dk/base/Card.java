@@ -115,5 +115,7 @@ public class Card extends HBox {
         return isMouseOver;
     }
 
-
+    public DayDisplay getDisplayParent() {
+        return displayParent;
+    }
 }

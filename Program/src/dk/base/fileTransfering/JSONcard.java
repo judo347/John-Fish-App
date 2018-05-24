@@ -11,4 +11,16 @@ public class JSONcard {
         this.text = text;
         this.isChecked = isChecked;
     }
+
+    public String getOwnedByDisplay() {
+        return ownedByDisplay;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
 }
