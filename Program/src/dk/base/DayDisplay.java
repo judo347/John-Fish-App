@@ -140,4 +140,8 @@ public class DayDisplay extends VBox {
 
         return isMouseOverACard;
     }
+
+    public ArrayList<Card> getCardsList() {
+        return new ArrayList<>(cardsList);
+    }
 }

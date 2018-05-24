@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class App extends Application {
 
-    private enum DisplayNames{
+    public enum DisplayNames{
         EXTRA("Extra"),
         WEEKGOALS("Weekgoals"),
         MONDAY("Monday"),
