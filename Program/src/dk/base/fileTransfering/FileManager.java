@@ -1,4 +1,4 @@
-package dk.base;
+package dk.base.fileTransfering;
 
 import com.besaba.revonline.pastebinapi.Pastebin;
 import com.besaba.revonline.pastebinapi.impl.factory.PastebinFactory;
@@ -7,6 +7,8 @@ import com.besaba.revonline.pastebinapi.paste.PasteBuilder;
 import com.besaba.revonline.pastebinapi.paste.PasteExpire;
 import com.besaba.revonline.pastebinapi.paste.PasteVisiblity;
 import com.besaba.revonline.pastebinapi.response.Response;
+import dk.base.Card;
+import dk.base.DayDisplay;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
