@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** TODO WHEN WE LOAD FROM PASTEBIN, TAKE THE MOST RECENT ONE. */
+/** TODO: whitelist an IP to use the Pastebin API. */
+/** TODO: Maybe use google drive? https://developers.google.com/drive/api/v3/quickstart/java*/
 
 public class FileManager {
 
@@ -105,7 +107,10 @@ public class FileManager {
 
         final String userKey = userLoginKeyResponse.get();
 
-        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5); //The limit could be changed to one?
+        System.out.println(userKey); //TODO TMEP
+
+        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey); //The limit could be changed to one?
+        //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5); //The limit could be changed to one?
         //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(USER_KEY, 5);
 
         if (pastesResponse.hasError()) {
