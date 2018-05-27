@@ -14,10 +14,8 @@ public class JSON {
     private static final String KEY_TEXT = "text";
     private static final String KEY_ISCHECKED = "isChecked";
 
-    public void 
-
     /** Takes a HBox and returns an array of string that is cards in JSON format. */
-    private static ArrayList<String> createJSONstring(HBox hBox){
+    public static ArrayList<String> createJSONstring(HBox hBox){
 
         int numberOfDisplays = App.DisplayNames.values().length;
 

@@ -1,5 +1,6 @@
 package dk.base;
 
+import dk.base.fileTransfering.FileManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -63,7 +64,8 @@ public class App extends Application {
 
         addTestCards(); //TODO REMOVE TEMP
 
-        //FileManager.saveToFile(root);
+        //FileManager.saveToPastebin(root);
+        FileManager.loadFromPasteBin();
     }
 
     /** Used to add temp cards for testing. */

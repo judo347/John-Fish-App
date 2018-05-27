@@ -9,6 +9,7 @@ import com.besaba.revonline.pastebinapi.paste.PasteVisiblity;
 import com.besaba.revonline.pastebinapi.response.Response;
 import dk.base.Card;
 import dk.base.DayDisplay;
+import dk.base.fileTransfering.JSON;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
@@ -16,71 +17,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** TODO WHEN WE LOAD FROM PASTEBIN, TAKE THE MOST RECENT ONE. */
+/** TODO: whitelist an IP to use the Pastebin API. */
+/** TODO: Maybe use google drive? https://developers.google.com/drive/api/v3/quickstart/java*/
 
 public class FileManager {
 
     private static final String DEV_KEY = "5d9b27419e24a576ff014e8c1c49738b";
-    private static final String USER_NAME = "mkTodoApp";
+    private static final String USER_NAME = "mktodoapp";
     private static final String USER_PASSWORD = "je7Zk8BK";
     private static final String PASTE_URL = "https://pastebin.com/KZXSGkp4";
     private static final String PASTE_URL_POSTFIX = "KZXSGkp4";
     private static final String PASTE_NAME = "mikkelkuntz";
-    private static final String USER_KEY = "4a591c3189c450be28f80fecb36fe09c";
+    private static final String USER_KEY = "7867f43dfe587ff8759737b94b21974d";
+    //Aquired from https://pastebin.com/api/api_user_key.html
 
-    public static void saveToFile(HBox root){
+    public static void saveToPastebin(HBox root){
 
-        if(root.getChildren().size() != 5) //Check for correct number of elements
-            throw new IllegalArgumentException();
+        //Convert HBox with cards into string lines.
+        ArrayList<String> cardLines = new ArrayList<>(JSON.createJSONstring(root));
 
-        //TODO Is the order always this??
-
-        //Get the displays
-        DayDisplay old = (DayDisplay)root.getChildren().get(0);
-        DayDisplay today = (DayDisplay)root.getChildren().get(1);
-        DayDisplay tomorrow = (DayDisplay)root.getChildren().get(2);
-        DayDisplay theDayAfter = (DayDisplay)root.getChildren().get(3);
-        DayDisplay thoughts = (DayDisplay)root.getChildren().get(4);
-
-        //Convert cards in displays to arraylists of strings
-        ArrayList<String> oldLines = fromDayDisplayToStrings(old);
-        ArrayList<String> todayLines = fromDayDisplayToStrings(today);
-        ArrayList<String> tomorrowLines = fromDayDisplayToStrings(tomorrow);
-        ArrayList<String> theDayAfterLines = fromDayDisplayToStrings(theDayAfter);
-        ArrayList<String> thoughtsLines = fromDayDisplayToStrings(thoughts);
-
-
-
-        //Create one string containing all info //TODO COULD AND SHOULD BE MADE TO JSON
+        //Create one string containing all info
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("OLD:");
-        for(String string : oldLines){
+        for(String string : cardLines)
             stringBuilder.append(string);
-        }
 
-        stringBuilder.append(";TODAY:");
-        for(String string : todayLines){
-            stringBuilder.append(string);
-        }
-
-        stringBuilder.append(";TOMORROW:");
-        for(String string : tomorrowLines){
-            stringBuilder.append(string);
-        }
-
-        stringBuilder.append(";THEDAYAFTER:");
-        for(String string : theDayAfterLines){
-            stringBuilder.append(string);
-        }
-
-        stringBuilder.append(";TOUGHTS:");
-        for(String string : thoughtsLines){
-            stringBuilder.append(string);
-        }
-
+        //Paste the string to pastebin
         pasteToPastebin(stringBuilder.toString());
     }
 
+    /** Pastes a string to pastebin.com*/
     private static void pasteToPastebin(String pasteString){
         PastebinFactory factory = new PastebinFactory();
         Pastebin pastebin = factory.createPastebin(DEV_KEY);
@@ -110,7 +76,7 @@ public class FileManager {
         System.out.println("Paste published! Url: " + postResult.get());
     }
 
-    /** boolean String */
+    /** boolean String TODO : needed? */
     private static ArrayList<String> fromDayDisplayToStrings(DayDisplay dayDisplay){
 
         ArrayList<String> cardStrings = new ArrayList<>();
@@ -131,6 +97,7 @@ public class FileManager {
         PastebinFactory factory = new PastebinFactory();
         Pastebin pastebin = factory.createPastebin(DEV_KEY);
 
+        //Login to pastebin
         final Response<String> userLoginKeyResponse = pastebin.login(USER_NAME, USER_PASSWORD);
 
         if (userLoginKeyResponse.hasError()) {
@@ -140,7 +107,10 @@ public class FileManager {
 
         final String userKey = userLoginKeyResponse.get();
 
-        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5);
+        System.out.println(userKey); //TODO TMEP
+
+        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey); //The limit could be changed to one?
+        //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5); //The limit could be changed to one?
         //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(USER_KEY, 5);
 
         if (pastesResponse.hasError()) {
