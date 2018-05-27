@@ -18,17 +18,16 @@ import java.util.List;
 
 /** TODO WHEN WE LOAD FROM PASTEBIN, TAKE THE MOST RECENT ONE. */
 /** TODO: whitelist an IP to use the Pastebin API. */
-/** TODO: Maybe use google drive? https://developers.google.com/drive/api/v3/quickstart/java*/
 
 public class FileManager {
 
-    private static final String DEV_KEY = "5d9b27419e24a576ff014e8c1c49738b";
-    private static final String USER_NAME = "mktodoapp";
-    private static final String USER_PASSWORD = "je7Zk8BK";
+    private static final String DEV_KEY = "6f2453a2ec17f30915d7267cef08be18";
+    private static final String USER_NAME = "lekkkim";
+    private static final String USER_PASSWORD = "administrator";
     private static final String PASTE_URL = "https://pastebin.com/KZXSGkp4";
     private static final String PASTE_URL_POSTFIX = "KZXSGkp4";
     private static final String PASTE_NAME = "mikkelkuntz";
-    private static final String USER_KEY = "7867f43dfe587ff8759737b94b21974d";
+    private static final String USER_KEY = "b1a996641a815f5b8c591b17eec11fd0";
     //Aquired from https://pastebin.com/api/api_user_key.html
 
     public static void saveToPastebin(HBox root){
@@ -109,8 +108,8 @@ public class FileManager {
 
         System.out.println(userKey); //TODO TMEP
 
-        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey); //The limit could be changed to one?
-        //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5); //The limit could be changed to one?
+        //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey); //The limit could be changed to one?
+        final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(userKey, 5); //The limit could be changed to one?
         //final Response<List<Paste>> pastesResponse = pastebin.getPastesOf(USER_KEY, 5);
 
         if (pastesResponse.hasError()) {

@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class App extends Application {
