@@ -27,11 +27,11 @@ hs_err_pid*
 Program/Program.iml
 Program/.idea/modules.xml
 *.xml
-<<<<<<< HEAD
 Pastebin-Java-Api/README.md
 Pastebin-Java-Api/Pastebin-Java-Api.iml
->>>>>>> master
+Program/out/*
+out/*
+JSON (orgDOTjson)/*
 Program/out/production/Program/dk/base/styles.css
+Program/src/dk/base/fileTransfering/JSON.java
 Program/out/production/Program/dk/base/styles.css
-Program/out/production/Program/dk/base/styles.css
-out/production/Program/dk/base/styles.css
